@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PermissonLibrary</string>
+    <string name="permission_not_null">申请的权限不能为空</string>
+    <string name="permission_denied">权限已被禁止，请到系统设置中打开权限</string>
+    <string name="permission_apply">获取权限</string>
+    <string name="permission_cancel">取消</string>
+
+
+</resources>
