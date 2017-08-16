@@ -15,7 +15,7 @@ allprojects {
 - step 2:Add the dependency
 
 ```
-compile 'com.github.kivi0105:PermissionUtil:master-SNAPSHOT'
+compile 'com.github.kivi0105:PermissionUtil:V0.0.1'
 ```
 
 - step 3:Use PermissionUtil
