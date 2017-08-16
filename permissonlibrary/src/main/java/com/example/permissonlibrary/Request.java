@@ -3,6 +3,7 @@ package com.example.permissonlibrary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -46,8 +47,23 @@ public class Request {
 
     public void request() {
         String[] applyPermissions;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            callback.granted();
+            return;
+        }
         if (permissions != null && permissions.length > 0) {
-            applyPermissions = checkPermissions(permissions);
+            //判断是否第一次申请权限
+            boolean isFirstRequest = context.getSharedPreferences(ConfigConsts.SPF_PERMISSION, Context.MODE_PRIVATE)
+                    .getBoolean(ConfigConsts.ISFIRST_REQUEST, true);
+            if (!isFirstRequest) {
+                applyPermissions = checkPermissions(permissions);
+            } else {
+                context.getSharedPreferences(ConfigConsts.SPF_PERMISSION, Context.MODE_PRIVATE)
+                        .edit()
+                        .putBoolean(ConfigConsts.ISFIRST_REQUEST, false)
+                        .apply();
+                applyPermissions = permissions;
+            }
         } else {
             throw new NullPointerException(context.getString(R.string.permission_not_null));
         }
@@ -60,6 +76,7 @@ public class Request {
             callback.granted();
         }
     }
+
 
     private String[] checkPermissions(String[] permissions) {
         List<String> deniedList = new ArrayList<String>();

@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PermissionUtil.with(MainActivity.this)
-                        .addPermissions(permissions)
-                        .addExplanation("拒绝相机权限将影响应用正常使用！")
-                        .addCallback(new PermissionCallback() {
+                        .addPermissions(permissions)    //permission;String[]
+                        .addExplanation("拒绝相机权限将影响应用正常使用！")//explanation,if need
+                        .addCallback(new PermissionCallback() {         //callback
                             @Override
                             public void granted() {
                                 openCamera();

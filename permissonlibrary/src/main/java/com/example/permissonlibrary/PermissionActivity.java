@@ -53,7 +53,6 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     private void requestPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             boolean isShowExplanation = false;
             for (int i = 0; i < mPermissions.length; i++) {
                 if (ContextCompat.checkSelfPermission(this, mPermissions[i]) !=
@@ -71,8 +70,6 @@ public class PermissionActivity extends AppCompatActivity {
             if (isShowExplanation) {
                 showExplanationDialog();
             }
-
-        }
     }
 
 
